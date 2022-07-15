@@ -8,7 +8,7 @@ from models.dpca import Self_Dynamic_Prototype
 
 from ddf.ddf import DDFPack
 
-class RENet(nn.Module):
+class DCANet(nn.Module):
 
     def __init__(self, args, mode=None):
         super().__init__()
