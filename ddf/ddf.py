@@ -1,12 +1,6 @@
-""" DDF operation and DDF/DDF-Up Pack
-
-The official implementation of the CVPR 2021 paper:
-* Decoupled Dynamic Filter Networks - https://arxiv.org/abs/2104.14107
-
-Thanks to Jiaqi Wang for the CARAFE repository and the associated paper:
-* CARAFE: Content-Aware ReAssembly of FEatures - https://arxiv.org/abs/1905.02188
-
-Copyright 2021 Jingkai Zhou
+""" 
+DDF operation and DDF/DDF-Up Pack
+Reference paper "Decoupled Dynamic Filter Networks" - https://arxiv.org/abs/2104.14107
 """
 import torch
 import torch.nn as nn
