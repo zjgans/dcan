@@ -10,7 +10,7 @@ from common.meter import Meter
 from common.utils import compute_accuracy, load_model, setup_run, by,set_gpu,set_seed
 from models.dataloader.samplers import CategoriesSampler
 from models.dataloader.data_utils import dataset_builder
-from models.renet import RENet
+from models.renet import DCANet
 
 def evaluate(epoch, model, loader, args=None, set='val'):
     model.eval()
@@ -66,7 +66,7 @@ if __name__ == '__main__':
 
     args = setup_run(arg_mode='test')
     ''' define model '''
-    model = RENet(args).cuda()
+    model = DCANet(args).cuda()
     model = nn.DataParallel(model, device_ids=args.device_ids)
 
     test_main(model, args)
