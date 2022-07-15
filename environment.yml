@@ -76,5 +76,5 @@ dependencies:
     - subprocess32==3.5.4
     - urllib3==1.26.6
     - wandb==0.12.0
-prefix: /home/dahyun/anaconda3/envs/dpcn
+prefix: /home/dahyun/anaconda3/envs/dcan
 
