@@ -149,12 +149,12 @@ def by(s):
     return yellow
 
 def parse_args(arg_mode):
-    parser = argparse.ArgumentParser(description='Relational Embedding for Few-Shot Classification (ICCV 2021)')
+    parser = argparse.ArgumentParser(description='train')
 
     ''' about dataset '''
     parser.add_argument('-dataset', type=str, default='miniImageNet',
                         choices=['miniImageNet', 'cub', 'tieredImageNet', 'CIFAR-FS','FC100'])
-    parser.add_argument('-data_root', type=str, default='/data/lxj/odata/dataset', help='dir of datasets')
+    parser.add_argument('-data_root', type=str, default='/data/zhouj/odata/dataset', help='dir of datasets')
     parser.add_argument('--num_workers', type=int, default=8, help='num of workers to use')
 
     ''' about training specs '''
