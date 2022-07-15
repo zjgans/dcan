@@ -13,7 +13,7 @@ from common.utils import compute_accuracy, set_seed, setup_run,restart_from_chec
 from models.dataloader.samplers import CategoriesSampler
 from models.dataloader.data_utils import dataset_builder
 from models.dataloader.aux_dataloader import get_aux_dataloader
-from models.renet import RENet
+from models.renet import DCANet
 
 from test import test_main, evaluate
 from utils import rotrate_concat,record_data
@@ -119,7 +119,7 @@ def train_main(args):
     test_loader = [x for x in test_loader]
 
     set_seed(args.seed)
-    model = RENet(args).cuda()
+    model = DCANet(args).cuda()
     model = nn.DataParallel(model, device_ids=args.device_ids)
 
     if not args.no_wandb:
