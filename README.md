@@ -1,2 +1,1 @@
-# dcan
-Learning Dynamic Concept-Aware Network for Few-Shot Learning
+# Learning Dynamic Concept-Aware Network for Few-Shot Learning
