@@ -16,7 +16,7 @@ from torch.utils.data import DataLoader
 from sklearn.manifold import TSNE
 from models.dataloader.samplers import CategoriesSampler
 from models.dataloader.data_utils import dataset_builder
-from models.renet import RENet
+from models.renet import DCANet
 from can.can_heatmap import can_heatmap
 from common.utils import compute_accuracy, load_model, setup_run, by
 from test import evaluate
@@ -92,7 +92,7 @@ def parse_option():
 def main():
 
     args = parse_option()
-    model = RENet(args).cuda()
+    model = DCANet(args).cuda()
     # model = load_model(model, args.model_path)
     ckpt = torch.load(args.model_path)["params"]
     from collections import OrderedDict
