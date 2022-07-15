@@ -21,7 +21,7 @@ from torch.utils.data import DataLoader
 
 from models.dataloader.samplers import CategoriesSampler
 from models.dataloader.data_utils import dataset_builder
-from models.renet import RENet
+from models.renet import DCANet
 from can.can_heatmap import can_heatmap
 from common.utils import compute_accuracy, load_model, setup_run, by
 
@@ -32,7 +32,7 @@ def parse_option():
     ''' about dataset '''
     parser.add_argument('-dataset', type=str, default='miniImageNet',
                         choices=['miniImageNet', 'cub', 'tieredImageNet', 'CIFAR-FS'])
-    parser.add_argument('-data_root', type=str, default='/data/lxj/odata/dataset', help='dir of datasets')
+    parser.add_argument('-data_root', type=str, default='/data/zhouj/odata/dataset', help='dir of datasets')
     parser.add_argument('--num_workers', type=int, default=8, help='num of workers to use')
     parser.add_argument('--model_path',type=str,default='./checkpoints/miniImageNet/1shot-5way/ddf_eq_64_re0.5_nonlocal_0.25_C_320/max_acc.pth')
 
@@ -111,7 +111,7 @@ class Preprocessor(Dataset):
 
 def renet_heatmap():
     args = parse_option()
-    model = RENet(args).cuda()
+    model = DCANet(args).cuda()
     ckpt = torch.load(args.model_path)["params"]
     from collections import OrderedDict
     new_state_dict = OrderedDict()
