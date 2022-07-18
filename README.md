@@ -11,7 +11,7 @@ To test in the 5-way K-shot setting:
 ```bash
 bash scripts/test/{dataset_name}_5wKs.sh
 ```
-For example, to test ReNet on the miniImagenet dataset in the 5-way 1-shot setting:
+For example, to test DCAN on the miniImagenet dataset in the 5-way 1-shot setting:
 ```bash
 bash scripts/test/miniimagenet_5w1s.sh
 ```
@@ -21,7 +21,7 @@ To train in the 5-way K-shot setting:
 ```bash
 bash scripts/train/{dataset_name}_5wKs.sh
 ```
-For example, to train ReNet on the CUB dataset in the 5-way 1-shot setting:
+For example, to train DCAN on the CUB dataset in the 5-way 1-shot setting:
 ```bash
 bash scripts/train/cub_5w1s.sh
 ```
