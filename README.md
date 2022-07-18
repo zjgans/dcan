@@ -9,7 +9,7 @@ The following datasets are used in our paper:
  
  [**CIFAR-FS**](https://drive.google.com/file/d/1GjGMI0q3bgcpcB_CjI40fX54WgLPuTpS/view?usp=sharing)
  
- CUB_200_2011 (https://drive.google.com/file/d/1hbzc_P1FuxMkcabkgn9ZKinBwW683j45/view)
+ [**CUB_200_2011**](https://drive.google.com/file/d/1hbzc_P1FuxMkcabkgn9ZKinBwW683j45/view)
 
 ## :pushpin: Quick start: testing scripts
 To test in the 5-way K-shot setting:
