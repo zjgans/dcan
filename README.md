@@ -16,7 +16,7 @@ splitting 100 classes of the CIFAR-100 dataset into 64, 16,and 20 classes for tr
  [**CUB_200_2011**](https://drive.google.com/file/d/1hbzc_P1FuxMkcabkgn9ZKinBwW683j45/view)  is a fine-grainde dataset
 consisting of 11,778 images from 200 bird categories, 100/50/50 classes are divided into train/val/test set.
 
-## :pushpin: Quick start: testing scripts
+##  Quick start: testing scripts
 To test in the 5-way K-shot setting:
 ```bash
 bash scripts/test/{dataset_name}_5wKs.sh
@@ -26,7 +26,7 @@ For example, to test DCAN on the miniImagenet dataset in the 5-way 1-shot settin
 bash scripts/test/miniimagenet_5w1s.sh
 ```
 
-## :fire: Training scripts
+##  Training scripts
 To train in the 5-way K-shot setting:
 ```bash
 bash scripts/train/{dataset_name}_5wKs.sh
