@@ -4,11 +4,11 @@
 The following datasets are used in our paper:
 
  [**miniImageNet**](https://drive.google.com/file/d/12V7qi-AjrYi6OoJdYcN_k502BM_jcP8D/view?usp=sharing) contains 64 classes
-for training, 16 classes for validation, and 20 classes for testing
+for training, 16 classes for validation, and 20 classes for test
  
  [**tieredImageNet**](https://drive.google.com/open?id=1nVGCTd9ttULRXFezh4xILQ9lUkg0WZCG) contains 608 ImageNet classes
 that are grouped into 34 high-level categories, which furtherare divided into 20/351, 6/97, and 8/160 categories/classes
-for training, validation, and testing.
+for training, validation, and test.
  
  [**CIFAR-FS**](https://drive.google.com/file/d/1GjGMI0q3bgcpcB_CjI40fX54WgLPuTpS/view?usp=sharing) is derived from CIFAR-100 dataset, which is build by randomly
 splitting 100 classes of the CIFAR-100 dataset into 64, 16,and 20 classes for training, validation, and testing, respectively.
