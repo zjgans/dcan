@@ -4,7 +4,7 @@
 The following datasets are used in our paper:
 
  [**miniImageNet**](https://drive.google.com/file/d/12V7qi-AjrYi6OoJdYcN_k502BM_jcP8D/view?usp=sharing) contains 64 classes
-for training, 16 classes for validation, and 20 classes for test
+for training, 16 classes for validation, and 20 classes for test.
  
  [**tieredImageNet**](https://drive.google.com/open?id=1nVGCTd9ttULRXFezh4xILQ9lUkg0WZCG) contains 608 ImageNet classes
 that are grouped into 34 high-level categories, which furtherare divided into 20/351, 6/97, and 8/160 categories/classes
