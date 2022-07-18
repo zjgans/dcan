@@ -1,5 +1,8 @@
 # Learning Dynamic Concept-Aware Network for Few-Shot Learning
 # Dataset
+
+The following datasets are used in our paper:
+
  [**miniImageNet**](https://drive.google.com/file/d/12V7qi-AjrYi6OoJdYcN_k502BM_jcP8D/view?usp=sharing) 
  
  [**tieredImageNet**](https://drive.google.com/open?id=1nVGCTd9ttULRXFezh4xILQ9lUkg0WZCG)
