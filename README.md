@@ -6,3 +6,22 @@
  
  [**CIFAR-FS**](https://drive.google.com/file/d/1GjGMI0q3bgcpcB_CjI40fX54WgLPuTpS/view?usp=sharing)
 
+## :pushpin: Quick start: testing scripts
+To test in the 5-way K-shot setting:
+```bash
+bash scripts/test/{dataset_name}_5wKs.sh
+```
+For example, to test ReNet on the miniImagenet dataset in the 5-way 1-shot setting:
+```bash
+bash scripts/test/miniimagenet_5w1s.sh
+```
+
+## :fire: Training scripts
+To train in the 5-way K-shot setting:
+```bash
+bash scripts/train/{dataset_name}_5wKs.sh
+```
+For example, to train ReNet on the CUB dataset in the 5-way 1-shot setting:
+```bash
+bash scripts/train/cub_5w1s.sh
+```
