@@ -3,7 +3,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 from models.resnet import ResNet
-from models.dpca import Self_Dynamic_Prototype
+from models.dpta import Self_Dynamic_Prototype
 
 from ddf.ddf import DDFPack
 
