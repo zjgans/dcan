@@ -7,10 +7,68 @@ import argparse
 from torch.utils.data import DataLoader
 
 from common.meter import Meter
-from common.utils import compute_accuracy, load_model, setup_run, by,set_gpu,set_seed
+from common.utils import compute_accuracy, load_model, by,set_gpu,set_seed
 from models.dataloader.samplers import CategoriesSampler
 from models.dataloader.data_utils import dataset_builder
-from models.renet import DCANet
+from models.dcan import DCANet
+
+def parse_option():
+    parser = argparse.ArgumentParser('test')
+
+    ''' about dataset '''
+    parser.add_argument('-dataset', type=str, default='miniImageNet',
+                        choices=['miniImageNet', 'cub', 'tieredImageNet', 'CIFAR-FS'])
+    parser.add_argument('-data_root', type=str, default='/data/~/dataset', help='dir of datasets')
+    parser.add_argument('--num_workers', type=int, default=8, help='num of workers to use')
+    parser.add_argument('--model_path',type=str,default='./checkpoints/miniImageNet/1shot-5way/~/max_acc.pth')
+
+
+    parser.add_argument('-temperature', type=float, default=0.2, metavar='tau',
+                        help='temperature for metric-based loss')
+
+    parser.add_argument('--save_freq', type=int, default=5, help='save frequency')
+    parser.add_argument('-save_all', action='store_true', help='save models on each epoch')
+    parser.add_argument('--use_resume', action='store_true', help='use the result of training before')
+    parser.add_argument('--resume_file', type=str, default='epoch_35.pth')
+
+    ''' about few-shot episodes '''
+    parser.add_argument('-way', type=int, default=5, metavar='N', help='number of few-shot classes')
+    parser.add_argument('-shot', type=int, default=1, metavar='K', help='number of shots')
+    parser.add_argument('-query', type=int, default=15, help='number of query image per class')
+    parser.add_argument('-val_episode', type=int, default=200, help='number of validation episode')
+    parser.add_argument('-test_episode', type=int, default=2000, help='number of testing episodes after training')
+    parser.add_argument('-proto_size', type=int, default=100, help='the number of dynamic prototype')
+    parser.add_argument('--meta_class', type=int, default=5, help='class of 5-way setting')
+    parser.add_argument('--crop_size', type=int, default=84)
+
+    parser.add_argument('--hidden_dim', type=int, default=320, help='hidden size for cross attention layer')
+    parser.add_argument('-temperature_attn', type=float, default=5, metavar='gamma',
+                        help='temperature for softmax in computing cross-attention')
+
+    ''' about env '''
+    parser.add_argument('-gpu', default='3', help='the GPU ids e.g. \"0\", \"0,1\", \"0,1,2\", etc')
+    parser.add_argument('-test_tag', type=str, default='1',
+                        help='extra dir name added to checkpoint dir')
+    parser.add_argument('-seed', type=int, default=1, help='random seed')
+    args = parser.parse_args()
+
+    if args.dataset == 'miniImageNet':
+        args.num_class = 64
+    elif args.dataset == 'cub':
+        args.num_class = 100
+    elif args.dataset == 'fc100':
+        args.num_class = 60
+    elif args.dataset == 'tieredImageNet':
+        args.num_class = 351
+    elif args.dataset == 'CIFAR-FS':
+        args.num_class = 64
+        args.crop_size = 42
+    elif args.dataset == 'cars':
+        args.num_class = 130
+    elif args.dataset == 'dogs':
+        args.num_class = 70
+
+    return args
 
 def evaluate(epoch, model, loader, args=None, set='val'):
     model.eval()
@@ -64,8 +122,9 @@ def test_main(model, args):
 
 if __name__ == '__main__':
 
-    args = setup_run(arg_mode='test')
+    args = parse_option()
     ''' define model '''
+    set_seed(args.seed)
     model = DCANet(args).cuda()
     model = nn.DataParallel(model, device_ids=args.device_ids)
 
