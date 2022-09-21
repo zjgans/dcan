@@ -21,9 +21,8 @@ from torch.utils.data import DataLoader
 
 from models.dataloader.samplers import CategoriesSampler
 from models.dataloader.data_utils import dataset_builder
-from models.renet import DCANet
-from can.can_heatmap import can_heatmap
-from common.utils import compute_accuracy, load_model, setup_run, by
+from models.dcan import DCANet
+from common.utils import compute_accuracy, load_model,  by
 
 mkl.set_num_threads(2)
 def parse_option():
@@ -142,8 +141,6 @@ def renet_heatmap():
     # _, test_acc, test_ci = evaluate("best", model, val_loader, args, set='test')
     # print(f'[final] epo:{"best":>3} | {by(test_acc)} +- {test_ci:.3f}')
 
-    # can heatmap
-
     pre_num = args.way * (args.shot + args.query)
     pre_query = args.way * args.query
     pre_spt = args.way * args.shot
@@ -218,7 +215,7 @@ def renet_heatmap():
         heatmap(images, f_q, pre_num, batch_id, img_size=84, split='scr')
         heatmap_final(spt_imgs, spt_feat, pre_spt, batch_id, img_size=84, split='support')
         heatmap_final(qry_imgs, qry_feat, pre_query, batch_id, img_size=84, split='query')
-        can_heatmap(images,batch_id)
+     
 
 def heatmap(im_q, f_q, batch_size,batch_id, img_size,split):
     os.makedirs('./imgs/test/batch_{}/_{}/'.format(batch_id,split), exist_ok=True)
