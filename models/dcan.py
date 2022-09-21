@@ -3,7 +3,6 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 from models.resnet import ResNet
-from common.utils import setup_run
 from models.dpca import Self_Dynamic_Prototype
 
 from ddf.ddf import DDFPack
@@ -22,12 +21,13 @@ class DCANet(nn.Module):
         self.fc = nn.Linear(self.encoder_dim, self.args.num_class)
         self.ddf = DDFPack(in_channels=640)
 
-        self.dynamic_prototype = Self_Dynamic_Prototype(args.proto_size, 640, 320, tem_update=0.1, temp_gather=0.1)
+        self.dynamic_prototype = Self_Dynamic_Prototype(args.proto_size,args, 640, 320, tem_update=0.1, temp_gather=0.1)
         self.cca_1x1 = nn.Sequential(
             nn.Conv2d(self.encoder_dim, 64, kernel_size=1, bias=False),
             nn.BatchNorm2d(64),
             nn.ReLU()
         )
+        # self.lifddf = LIFDDFilter(dim=640)
 
         self.eq_head = nn.Sequential(
             nn.Linear(640, 640),
@@ -102,7 +102,9 @@ class DCANet(nn.Module):
 
         spt_attended = spt_attended.view(-1,*spt_attended.shape[2:])
         spt_attended = self.ddf(spt_attended)
+        # spt_attended,qry_attended = self.lifddf(spt_attended,qry_attended)
         spt_attended = spt_attended.view(num_qry,self.args.way,*spt_attended.shape[1:])
+        # qry_attended = qry_attended.view(num_qry,self.args.way,*qry_attended.shape[1:])
 
         spt_attended_pooled = spt_attended.mean(dim=[-1, -2])
         qry_attended_pooled = qry_attended.mean(dim=[-1, -2])
@@ -123,13 +125,7 @@ class DCANet(nn.Module):
         return x
 
     def get_cross_correlation_map(self, spt, qry):
-        '''
-        The value H and W both for support and query is the same, but their subscripts are symbolic.
-        :param spt: way * C * H_s * W_s
-        :param qry: num_qry * C * H_q * W_q
-        :return: 4d correlation tensor: num_qry * way * H_s * W_s * H_q * W_q
-        :rtype:
-        '''
+
         way = spt.shape[0]
         num_qry = qry.shape[0]
 
