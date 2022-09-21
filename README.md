@@ -1,4 +1,4 @@
-# Learning Dynamic Concept-Aware Network for Few-Shot Learning
+# Dynamic Concept-Aware Network for Few-Shot Learning
 # Dataset
 
 The following datasets are used in our paper:
