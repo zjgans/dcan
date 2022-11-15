@@ -55,8 +55,8 @@ class Self_Dynamic_Prototype(nn.Module):
         key_ = key_.permute(0,2,3,1)
         query_ = key_.contiguous().view(batch_size,-1,dim)
         support_feat = query_[:self.num_spt]
-        support_feat = support_feat.view(self.n_way,self.k_shot,h*w,dim)
-        support_feat = support_feat.mean(dim=1)
+        support_feat = support_feat.view(self.k,self.n_way_shot,h*w,dim)
+        support_feat = support_feat.mean(dim=0)
         query_feat = query_[self.num_spt:]
 
         if self.training:
