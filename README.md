@@ -13,7 +13,7 @@ for training, validation, and test.
  [**CIFAR-FS**](https://drive.google.com/file/d/1GjGMI0q3bgcpcB_CjI40fX54WgLPuTpS/view?usp=sharing) is derived from CIFAR-100 dataset, which is build by randomly
 splitting 100 classes of the CIFAR-100 dataset into 64, 16,and 20 classes for training, validation, and testing, respectively.
  
- [**CUB_200_2011**](https://drive.google.com/file/d/1hbzc_P1FuxMkcabkgn9ZKinBwW683j45/view)  is a fine-grainde dataset
+ [**CUB_200_2011**](https://github.com/zjgans/DeepEMD)  is a fine-grainde dataset
 consisting of 11,778 images from 200 bird categories, 100/50/50 classes are divided into train/val/test set.
 
 ##  Quick start: testing scripts
