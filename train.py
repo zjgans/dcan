@@ -125,7 +125,7 @@ def train(epoch, model, loader,optimizer, args=None):
         data, train_labels = data.cuda(), train_labels.cuda()
         # data_aux, train_labels_aux = data_aux.cuda(),train_labels_aux.cuda()
 
-        data_aux = data_aux[0].cuda()
+        data_aux = data_aux.cuda()
         batch_size = data_aux.size(0)
         data_aux = rotrate_concat([data_aux])
         train_labels_aux = train_labels_aux.repeat(args.trans).cuda()
