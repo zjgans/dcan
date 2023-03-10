@@ -16,11 +16,8 @@ class GeomTransform:
         self.size = opt.crop_size
 
     def transform_sample(self, img, indx=None):
-        if indx is not None:
-            out = transforms.functional.resized_crop(img, indx[0], indx[1], indx[2], indx[3], (self.size, self.size))
-        else:
-            out = img
-        out = self.color_transform(out)
+     
+        out = self.color_transform(img)
         # out = transforms.RandomGrayscale(p=0.2)(out)
         out = transforms.RandomHorizontalFlip()(out)
         out = transforms.functional.to_tensor(out)
@@ -31,31 +28,17 @@ class GeomTransform:
         # img = np.asarray(x).astype('uint8')
         if self.opt.dataset == 'CIFAR-FS' or self.opt.dataset == 'FC100':
             img = transforms.RandomResizedCrop(84)(Image.fromarray(x))
-            img2 = self.transform_sample(img, [np.random.randint(10), 0, 22, 32])
-            img3 = self.transform_sample(img, [0, np.random.randint(10), 32, 22])
-            img4 = self.transform_sample(img, [np.random.randint(10), np.random.randint(10), 22, 22])
             img = self.transform_sample(img)
 
-        if self.opt.dataset == 'miniImageNet':
-            img = transforms.RandomCrop(84, padding=8)(Image.fromarray(x))
-            img2 = self.transform_sample(img, [np.random.randint(28), 0, 56, 84])
-            img3 = self.transform_sample(img, [0, np.random.randint(28), 84, 56])
-            img4 = self.transform_sample(img, [np.random.randint(28), np.random.randint(28), 56, 56])
+        if self.opt.dataset == 'miniImageNet' or self.opt.dataset == 'tieredImageNet':
+            img = transforms.RandomCrop(84, padding=8)(Image.fromarray(x)
             img = self.transform_sample(img)
-        if self.opt.dataset == 'tieredImageNet':
-            img = transforms.RandomCrop(84, padding=8)(Image.fromarray(x))
-            img2 = self.transform_sample(img, [np.random.randint(28), 0, 56, 84])
-            img3 = self.transform_sample(img, [0, np.random.randint(28), 84, 56])
-            img4 = self.transform_sample(img, [np.random.randint(28), np.random.randint(28), 56, 56])
-            img = self.transform_sample(img)
+      
         if self.opt.dataset == 'cub':
             img = transforms.RandomResizedCrop(84)(Image.open(x).convert('RGB'))
-            img2 = self.transform_sample(img, [np.random.randint(28), 0, 56, 84])
-            img3 = self.transform_sample(img, [0, np.random.randint(28), 84, 56])
-            img4 = self.transform_sample(img, [np.random.randint(28), np.random.randint(28), 56, 56])
             img = self.transform_sample(img)
 
-        return [img,img2,img3,img4]
+        return img
 
 
 class Preprocessor(Dataset):
@@ -71,9 +54,9 @@ class Preprocessor(Dataset):
     def __getitem__(self, item):
         img, label = self.dataset[item]
 
-        img_geo = self.geo_transforms(img)
+        img = self.geo_transforms(img)
 
-        return img_geo, label
+        return img, label
 
 def get_aux_dataloader(opt, dataset):
     if opt.dataset == 'CIFAR-FS' or opt.dataset == 'FC100':
